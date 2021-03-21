@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import AddTodo from "./components/AddTodo"
+import Todos from "./components/Todos"
+import { users } from "./constants/users"
+import GlobalContext from "./context/GlobalContext"
 
-function App() {
+const App = () => {
+  const [usersList, setUsersList] = useState(users)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <GlobalContext.Provider value={{ usersList, setUsersList }}>
+      <AddTodo />
+      <Todos />
+    </GlobalContext.Provider>
+  )
 }
 
-export default App;
+export default App
